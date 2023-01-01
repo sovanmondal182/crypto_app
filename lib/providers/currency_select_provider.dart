@@ -7,17 +7,17 @@ class CurrencySelectProvider with ChangeNotifier {
   String? currencySymbol;
 
   CurrencySelectProvider() {
-    getCurrency();
+    fetchCurrency();
   }
 
-  Future<void> getCurrency() async {
+  Future<void> fetchCurrency() async {
     currency = await LocalStorage.getCurrency() ?? 'INR';
     isLoading = false;
 
     notifyListeners();
   }
 
-  Future<void> getCurrencySymbol() async {
+  Future<void> fetchCurrencySymbol() async {
     currencySymbol = await LocalStorage.getCurrencySymbol() ?? '₹';
     isLoading = false;
 

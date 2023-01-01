@@ -1,7 +1,8 @@
-import 'package:crypto_app/constants/themes.dart';
+import 'package:crypto_app/constants/app_themes.dart';
 import 'package:crypto_app/pages/home_page.dart';
 import 'package:crypto_app/providers/coins_provider.dart';
 import 'package:crypto_app/providers/currency_select_provider.dart';
+import 'package:crypto_app/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,14 +21,18 @@ class MyApp extends StatelessWidget {
             create: (context) => CurrencySelectProvider()),
         ChangeNotifierProvider<CoinsProvider>(
             create: (context) => CoinsProvider()),
+        ChangeNotifierProvider<ThemeProvider>(
+            create: (context) => ThemeProvider()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        // themeMode: ThemeMode.system,
-        home: const HomePage(),
-      ),
+      child: Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          // themeMode: ThemeMode.system,
+          home: const HomePage(),
+        );
+      }),
     );
   }
 }

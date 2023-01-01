@@ -1,5 +1,4 @@
 import 'package:crypto_app/providers/coins_provider.dart';
-import 'package:crypto_app/providers/currency_select_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,8 +12,6 @@ class Coins extends StatefulWidget {
 class _CoinsState extends State<Coins> {
   @override
   Widget build(BuildContext context) {
-    String symbol =
-        Provider.of<CurrencySelectProvider>(context).currencySymbol ?? '₹';
     return Consumer<CoinsProvider>(builder: (context, coinsProvider, child) {
       if (coinsProvider.isLoading == true) {
         return const Center(
@@ -53,7 +50,7 @@ class _CoinsState extends State<Coins> {
                           ),
                     subtitle: Text(coinsProvider.coins[index].symbol!),
                     trailing: Text(
-                      "$symbol ${coinsProvider.coins[index].currentprice}",
+                      "${coinsProvider.symbol} ${coinsProvider.coins[index].currentprice}",
                     ),
                   );
                 },
@@ -63,7 +60,7 @@ class _CoinsState extends State<Coins> {
             onRefresh: () async {
               await coinsProvider.fetchCoins();
             },
-            child: Text("Found ${coinsProvider.coins.length} coins"),
+            child: const Text("No Data Found"),
           );
         }
       }

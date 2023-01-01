@@ -10,64 +10,65 @@ class CurrencySelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currency = Provider.of<CurrencySelectProvider>(context).currency;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(
-          'Currency: ',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        GestureDetector(
-          onTap: () {
-            showCurrencyPicker(
-              physics: const BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics()),
-              context: context,
-              showFlag: true,
-              showCurrencyName: true,
-              showCurrencyCode: true,
-              onSelect: (Currency currency) async {
-                Provider.of<CurrencySelectProvider>(context, listen: false)
-                    .setCurrency(currency.code);
-                Provider.of<CurrencySelectProvider>(context, listen: false)
-                    .setCurrencySymbol(currency.symbol);
-                await Provider.of<CoinsProvider>(context, listen: false)
-                    .fetchCoins();
+    return Consumer<CurrencySelectProvider>(
+      builder: (context, currencySelectProvider, child) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Currency: ',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                showCurrencyPicker(
+                  physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics()),
+                  context: context,
+                  showFlag: true,
+                  showCurrencyName: true,
+                  showCurrencyCode: true,
+                  onSelect: (Currency currency) async {
+                    currencySelectProvider.setCurrency(currency.code);
+                    currencySelectProvider.setCurrencySymbol(currency.symbol);
+                    await Provider.of<CoinsProvider>(context, listen: false)
+                        .fetchCoins();
+                  },
+                );
               },
-            );
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.black,
-                width: 1,
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Row(
-                children: [
-                  Text(
-                    currency ?? 'INR',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 1,
                   ),
-                  const Icon(
-                    CupertinoIcons.arrowtriangle_down_fill,
-                    size: 15,
-                  )
-                ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        currencySelectProvider.currency ?? 'INR',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Icon(
+                        CupertinoIcons.arrowtriangle_down_fill,
+                        size: 15,
+                      )
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 }
