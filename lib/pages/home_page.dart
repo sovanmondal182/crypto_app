@@ -1,13 +1,12 @@
+import 'package:crypto_app/pages/coins.dart';
 import 'package:crypto_app/providers/currency_select_provider.dart';
 import 'package:crypto_app/widgets/currency_selector.dart';
 import 'package:crypto_app/widgets/greeting_text.dart';
-import 'package:currency_picker/currency_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -24,12 +23,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ChangeNotifierProvider<CurrencySelectProvider>(
-        create: (context) => CurrencySelectProvider(),
-        builder: (context, child) {
+      body: Consumer<CurrencySelectProvider>(
+        builder: (context, currencySelectProvider, child) {
           return SafeArea(
             child: Container(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 left: 20,
                 right: 20,
                 top: 20,
@@ -43,7 +41,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     height: 20,
                   ),
                   const CurrencySelector(),
-                  TabBar(controller: tabController, tabs: [
+                  TabBar(controller: tabController, tabs: const [
                     Tab(
                       child: Text(
                         'Coins',
@@ -59,23 +57,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ]),
                   Expanded(
                     child: TabBarView(
-                      physics: BouncingScrollPhysics(
+                      physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics()),
                       controller: tabController,
                       children: [
-                        SingleChildScrollView(
-                          physics: BouncingScrollPhysics(
-                              parent: AlwaysScrollableScrollPhysics()),
-                          child: Center(
-                            child: Text('Coins'),
-                          ),
-                        ),
+                        const Coins(),
                         Column(
                           // crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              child: Text('Favorites'),
-                            ),
+                          children: const [
+                            Text('Favorites'),
                           ],
                         ),
                       ],

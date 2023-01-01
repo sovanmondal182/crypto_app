@@ -1,5 +1,7 @@
+import 'package:crypto_app/network/apis.dart';
+import 'package:crypto_app/providers/currency_select_provider.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class GreetingText extends StatelessWidget {
   const GreetingText({super.key});
@@ -18,7 +20,7 @@ class GreetingText extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Hi,',
               style: TextStyle(
                 fontSize: 30,
@@ -26,8 +28,13 @@ class GreetingText extends StatelessWidget {
               ),
             ),
             GestureDetector(
-                onTap: () {},
-                child: Icon(CupertinoIcons.sun_max_fill, size: 30))
+                onTap: () {
+                  final currency = Provider.of<CurrencySelectProvider>(context,
+                          listen: false)
+                      .currency;
+                  API.getCoins(currency);
+                },
+                child: const Icon(CupertinoIcons.sun_max_fill, size: 30))
           ],
         ),
         const SizedBox(height: 10),

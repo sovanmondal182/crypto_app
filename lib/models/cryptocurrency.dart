@@ -42,18 +42,21 @@ class Cryptocurrency {
         symbol: map['symbol'],
         name: map['name'],
         image: map['image'],
-        currentprice: map['current_price'],
-        marketcap: map['market_cap'],
+        currentprice: double.parse(map['current_price'].toString()),
+        marketcap: double.parse(map['market_cap'].toString()),
         marketcaprank: map['market_cap_rank'],
-        totalvolume: map['total_volume'],
-        high_24h: map['high_24h'],
-        low_24h: map['low_24h'],
-        pricechange_24h: map['price_change_24h'],
-        pricechangepercentage_24h: map['price_change_percentage_24h'],
-        marketcapchange_24h: map['market_cap_change_24h'],
-        marketcapchangepercentage_24h: map['market_cap_change_percentage_24h'],
-        circulatingsupply: map['circulating_supply'],
-        ath: map['ath'],
-        atl: map['atl']);
+        totalvolume: double.parse(map['total_volume'].toString()),
+        high_24h: double.parse(map['high_24h'].toString()),
+        low_24h: double.parse(map['low_24h'].toString()),
+        pricechange_24h: double.parse(map['price_change_24h'].toString()),
+        pricechangepercentage_24h:
+            double.parse(map['price_change_percentage_24h'].toString()),
+        marketcapchange_24h:
+            double.parse(map['market_cap_change_24h'].toString()),
+        marketcapchangepercentage_24h:
+            double.parse(map['market_cap_change_percentage_24h'].toString()),
+        circulatingsupply: double.parse(map['circulating_supply'].toString()),
+        ath: double.parse(map['ath'].toString()),
+        atl: double.parse(map['atl'].toString()));
   }
 }

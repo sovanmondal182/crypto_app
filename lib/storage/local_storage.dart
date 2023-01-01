@@ -8,10 +8,23 @@ class LocalStorage {
     return currentCurrency;
   }
 
+  static Future<bool> saveCurrencySymbol(String currencySymbol) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    bool currentCurrencySymbol =
+        await sharedPreferences.setString('currencySymbol', currencySymbol);
+    return currentCurrencySymbol;
+  }
+
   static Future<String?> getCurrency() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? currency = sharedPreferences.getString('currency');
     return currency;
+  }
+
+  static Future<String?> getCurrencySymbol() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? currencySymbol = sharedPreferences.getString('currencySymbol');
+    return currencySymbol;
   }
 
   static Future<bool> saveTheme(String theme) async {

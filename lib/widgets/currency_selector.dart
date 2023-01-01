@@ -1,3 +1,4 @@
+import 'package:crypto_app/providers/coins_provider.dart';
 import 'package:crypto_app/providers/currency_select_provider.dart';
 import 'package:currency_picker/currency_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,63 +11,63 @@ class CurrencySelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currency = Provider.of<CurrencySelectProvider>(context).currency;
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Currency: ',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text(
+          'Currency: ',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
-          GestureDetector(
-            onTap: () {
-              showCurrencyPicker(
-                physics: BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics()),
-                context: context,
-                showFlag: true,
-                showCurrencyName: true,
-                showCurrencyCode: true,
-                onSelect: (Currency currency) {
-                  Provider.of<CurrencySelectProvider>(context, listen: false)
-                      .setCurrency(currency.code);
-                },
-              );
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black,
-                  width: 1,
-                ),
+        ),
+        GestureDetector(
+          onTap: () {
+            showCurrencyPicker(
+              physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
+              context: context,
+              showFlag: true,
+              showCurrencyName: true,
+              showCurrencyCode: true,
+              onSelect: (Currency currency) async {
+                Provider.of<CurrencySelectProvider>(context, listen: false)
+                    .setCurrency(currency.code);
+                Provider.of<CurrencySelectProvider>(context, listen: false)
+                    .setCurrencySymbol(currency.symbol);
+                await Provider.of<CoinsProvider>(context, listen: false)
+                    .fetchCoins();
+              },
+            );
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.black,
+                width: 1,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Row(
-                  children: [
-                    Container(
-                      child: Text(
-                        currency ?? 'INR',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Row(
+                children: [
+                  Text(
+                    currency ?? 'INR',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Icon(
-                      CupertinoIcons.arrowtriangle_down_fill,
-                      size: 15,
-                    )
-                  ],
-                ),
+                  ),
+                  const Icon(
+                    CupertinoIcons.arrowtriangle_down_fill,
+                    size: 15,
+                  )
+                ],
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
