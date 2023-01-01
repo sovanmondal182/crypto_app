@@ -32,18 +32,18 @@ class _CoinsState extends State<Coins> {
                     title: Text(coinsProvider.coins[index].name!),
                     leading: coinsProvider.coins[index].image == null
                         ? Container(
-                            width: 30,
-                            height: 30,
+                            width: 40,
+                            height: 40,
                             decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.circular(10)),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(100)),
                           )
                         : Container(
-                            width: 30,
-                            height: 30,
+                            width: 40,
+                            height: 40,
                             decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(100),
                                 image: DecorationImage(
                                     image: NetworkImage(
                                         coinsProvider.coins[index].image!))),
