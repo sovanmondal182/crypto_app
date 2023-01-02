@@ -37,7 +37,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const GreetingText(),
+                  // ignore: prefer_const_constructors
+                  GreetingText(),
                   const SizedBox(
                     height: 20,
                   ),

@@ -3,15 +3,21 @@ import 'package:crypto_app/pages/home_page.dart';
 import 'package:crypto_app/providers/coins_provider.dart';
 import 'package:crypto_app/providers/currency_select_provider.dart';
 import 'package:crypto_app/providers/theme_provider.dart';
+import 'package:crypto_app/storage/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  String currentTheme = await LocalStorage.getTheme() ?? 'light';
+  runApp(MyApp(
+    currentTheme: currentTheme,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String currentTheme;
+  const MyApp({super.key, required this.currentTheme});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<CoinsProvider>(
             create: (context) => CoinsProvider()),
         ChangeNotifierProvider<ThemeProvider>(
-            create: (context) => ThemeProvider()),
+            create: (context) => ThemeProvider(currentTheme)),
       ],
       child: Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
         return MaterialApp(

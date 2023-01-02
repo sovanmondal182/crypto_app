@@ -3,9 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class GreetingText extends StatelessWidget {
+class GreetingText extends StatefulWidget {
   const GreetingText({super.key});
 
+  @override
+  State<GreetingText> createState() => _GreetingTextState();
+}
+
+class _GreetingTextState extends State<GreetingText> {
   @override
   Widget build(BuildContext context) {
     ThemeProvider theme = Provider.of<ThemeProvider>(context, listen: false);

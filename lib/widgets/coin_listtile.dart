@@ -15,7 +15,7 @@ class CoinListTile extends StatelessWidget {
     CoinsProvider coinsProvider =
         Provider.of<CoinsProvider>(context, listen: false);
     return ListTile(
-      contentPadding: const EdgeInsets.all(0),
+      contentPadding: const EdgeInsets.only(left: 3, right: 3),
       title: Row(
         children: [
           Flexible(
@@ -30,7 +30,7 @@ class CoinListTile extends StatelessWidget {
                     coinsProvider.removefavorites(coin);
                   },
                   child: const Icon(
-                    size: 18,
+                    size: 20,
                     Icons.star,
                     color: Colors.yellow,
                   ),
@@ -40,7 +40,7 @@ class CoinListTile extends StatelessWidget {
                     coinsProvider.addfavorites(coin);
                   },
                   child: const Icon(
-                    size: 18,
+                    size: 20,
                     Icons.star_border,
                     color: Colors.yellow,
                   ),
@@ -80,6 +80,7 @@ class CoinListTile extends StatelessWidget {
         children: [
           Text(
             "${coinsProvider.symbol} ${coin.currentprice!.toStringAsFixed(4)}",
+            style: TextStyle(fontSize: 15),
           ),
           Text(
             (coin.pricechangepercentage_24h! > 0)

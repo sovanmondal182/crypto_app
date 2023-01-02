@@ -1,21 +1,25 @@
+import 'package:crypto_app/storage/local_storage.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider with ChangeNotifier {
-  ThemeMode themeMode = ThemeMode.light;
+  late ThemeMode themeMode;
 
-  // void setTheme(ThemeData theme) {
-  //   themeData = theme;
-  //   notifyListeners();
-  // }
-
-  void toggleTheme() {
-    themeMode = themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
-    notifyListeners();
+  ThemeProvider(String theme) {
+    if (theme == 'light') {
+      themeMode = ThemeMode.light;
+    } else {
+      themeMode = ThemeMode.dark;
+    }
   }
 
-  // void getTheme() {
-  //   themeData =
-  //       themeData == ThemeData.light() ? ThemeData.dark() : ThemeData.light();
-  //   notifyListeners();
-  // }
+  void toggleTheme() {
+    if (themeMode == ThemeMode.light) {
+      themeMode = ThemeMode.dark;
+      LocalStorage.saveTheme('dark');
+    } else {
+      themeMode = ThemeMode.light;
+      LocalStorage.saveTheme('light');
+    }
+    notifyListeners();
+  }
 }
