@@ -1,4 +1,5 @@
 import 'package:crypto_app/models/crypto_currency.dart';
+import 'package:crypto_app/pages/details_page.dart';
 import 'package:crypto_app/providers/coins_provider.dart';
 import 'package:crypto_app/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,15 @@ class CoinListTile extends StatelessWidget {
     CoinsProvider coinsProvider =
         Provider.of<CoinsProvider>(context, listen: false);
     return ListTile(
+      onTap: () {
+        print(coin.id);
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return DetailsPage(
+            id: coin.id!,
+            coin: coin,
+          );
+        }));
+      },
       contentPadding: const EdgeInsets.only(left: 3, right: 3),
       title: Row(
         children: [
@@ -28,6 +38,7 @@ class CoinListTile extends StatelessWidget {
               ? GestureDetector(
                   onTap: () {
                     coinsProvider.removefavorites(coin);
+                    print(coin.id);
                   },
                   child: const Icon(
                     size: 20,
@@ -80,7 +91,7 @@ class CoinListTile extends StatelessWidget {
         children: [
           Text(
             "${coinsProvider.symbol} ${coin.currentprice!.toStringAsFixed(4)}",
-            style: TextStyle(fontSize: 15),
+            style: const TextStyle(fontSize: 15),
           ),
           Text(
             (coin.pricechangepercentage_24h! > 0)

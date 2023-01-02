@@ -12,13 +12,13 @@ class ThemeProvider with ChangeNotifier {
     }
   }
 
-  void toggleTheme() {
+  Future<void> toggleTheme() async {
     if (themeMode == ThemeMode.light) {
       themeMode = ThemeMode.dark;
-      LocalStorage.saveTheme('dark');
+      await LocalStorage.saveTheme('dark');
     } else {
       themeMode = ThemeMode.light;
-      LocalStorage.saveTheme('light');
+      await LocalStorage.saveTheme('light');
     }
     notifyListeners();
   }

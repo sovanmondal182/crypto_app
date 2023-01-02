@@ -24,15 +24,15 @@ class CurrencySelectProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setCurrency(String currency) {
+  Future<void> setCurrency(String currency) async {
     this.currency = currency;
-    LocalStorage.saveCurrency(currency);
+    await LocalStorage.saveCurrency(currency);
     notifyListeners();
   }
 
-  void setCurrencySymbol(String currencySymbol) {
+  Future<void> setCurrencySymbol(String currencySymbol) async {
     this.currencySymbol = currencySymbol;
-    LocalStorage.saveCurrencySymbol(currencySymbol);
+    await LocalStorage.saveCurrencySymbol(currencySymbol);
     notifyListeners();
   }
 }
