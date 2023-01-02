@@ -1,4 +1,5 @@
 import 'package:crypto_app/providers/coins_provider.dart';
+import 'package:crypto_app/widgets/coin_listtile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,31 +29,7 @@ class _CoinsState extends State<Coins> {
                     parent: AlwaysScrollableScrollPhysics()),
                 itemCount: coinsProvider.coins.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(coinsProvider.coins[index].name!),
-                    leading: coinsProvider.coins[index].image == null
-                        ? Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(100)),
-                          )
-                        : Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(100),
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        coinsProvider.coins[index].image!))),
-                          ),
-                    subtitle: Text(coinsProvider.coins[index].symbol!),
-                    trailing: Text(
-                      "${coinsProvider.symbol} ${coinsProvider.coins[index].currentprice}",
-                    ),
-                  );
+                  return CoinListTile(coin: coinsProvider.coins[index]);
                 },
               ));
         } else {

@@ -1,8 +1,6 @@
-import 'package:crypto_app/providers/coins_provider.dart';
 import 'package:crypto_app/providers/currency_select_provider.dart';
 import 'package:currency_picker/currency_picker.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CurrencySelector extends StatelessWidget {
@@ -18,7 +16,7 @@ class CurrencySelector extends StatelessWidget {
             const Text(
               'Currency: ',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -34,35 +32,30 @@ class CurrencySelector extends StatelessWidget {
                   onSelect: (Currency currency) async {
                     currencySelectProvider.setCurrency(currency.code);
                     currencySelectProvider.setCurrencySymbol(currency.symbol);
-                    await Provider.of<CoinsProvider>(context, listen: false)
-                        .fetchCoins();
+                    // await Provider.of<CoinsProvider>(context, listen: false)
+                    //     .fetchCoins();
                   },
                 );
               },
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 1,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        currencySelectProvider.currency ?? 'INR',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+              child: Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Row(
+                  children: [
+                    Text(
+                      currencySelectProvider.currency ?? 'INR',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
-                      const Icon(
-                        CupertinoIcons.arrowtriangle_down_fill,
-                        size: 15,
-                      )
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      width: 3,
+                    ),
+                    const Icon(
+                      CupertinoIcons.arrowtriangle_down_fill,
+                      size: 9,
+                    )
+                  ],
                 ),
               ),
             ),

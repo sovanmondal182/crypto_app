@@ -1,10 +1,14 @@
+import 'package:crypto_app/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class GreetingText extends StatelessWidget {
   const GreetingText({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider theme = Provider.of<ThemeProvider>(context, listen: false);
     DateTime now = DateTime.now();
     String greeting = now.hour < 12
         ? 'Good Morning'
@@ -25,8 +29,13 @@ class GreetingText extends StatelessWidget {
               ),
             ),
             GestureDetector(
-                onTap: () {},
-                child: const Icon(CupertinoIcons.sun_max_fill, size: 30))
+              onTap: () {
+                theme.toggleTheme();
+              },
+              child: (theme.themeMode == ThemeMode.dark)
+                  ? const Icon(CupertinoIcons.sun_min_fill, size: 30)
+                  : const Icon(CupertinoIcons.moon_stars_fill, size: 30),
+            ),
           ],
         ),
         const SizedBox(height: 10),

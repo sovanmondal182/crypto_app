@@ -1,4 +1,5 @@
 import 'package:crypto_app/pages/coins.dart';
+import 'package:crypto_app/pages/favorites.dart';
 import 'package:crypto_app/providers/currency_select_provider.dart';
 import 'package:crypto_app/widgets/currency_selector.dart';
 import 'package:crypto_app/widgets/greeting_text.dart';
@@ -41,17 +42,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     height: 20,
                   ),
                   const CurrencySelector(),
-                  TabBar(controller: tabController, tabs: const [
+                  TabBar(controller: tabController, tabs: [
                     Tab(
                       child: Text(
                         'Coins',
-                        style: TextStyle(color: Colors.black, fontSize: 15),
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ),
                     Tab(
                       child: Text(
                         'Favorites',
-                        style: TextStyle(color: Colors.black, fontSize: 15),
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ),
                   ]),
@@ -60,14 +61,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics()),
                       controller: tabController,
-                      children: [
-                        const Coins(),
-                        Column(
-                          // crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
-                            Text('Favorites'),
-                          ],
-                        ),
+                      children: const [
+                        Coins(),
+                        Favorites(),
                       ],
                     ),
                   ),
