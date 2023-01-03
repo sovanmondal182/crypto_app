@@ -1,4 +1,5 @@
 import 'package:crypto_app/models/crypto_currency.dart';
+import 'package:crypto_app/network/apis.dart';
 import 'package:crypto_app/pages/details_page.dart';
 import 'package:crypto_app/providers/coins_provider.dart';
 import 'package:crypto_app/providers/theme_provider.dart';
@@ -16,11 +17,14 @@ class CoinListTile extends StatelessWidget {
     CoinsProvider coinsProvider =
         Provider.of<CoinsProvider>(context, listen: false);
     return ListTile(
-      onTap: () {
+      onTap: () async {
+        List<dynamic> marketChart =
+            await API.getMarketChart(coin.id, coinsProvider.currency);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return DetailsPage(
             id: coin.id!,
             coin: coin,
+            chartData: marketChart,
           );
         }));
       },

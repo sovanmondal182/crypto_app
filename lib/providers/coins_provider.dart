@@ -32,7 +32,7 @@ class CoinsProvider with ChangeNotifier {
     coins = temp;
     isLoading = false;
     notifyListeners();
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 10), () {
       fetchCoins();
     });
   }
@@ -52,5 +52,9 @@ class CoinsProvider with ChangeNotifier {
     coins[coin.marketcaprank! - 1].isfavorite = false;
     await LocalStorage.removeFavorite(coin.id!);
     notifyListeners();
+  }
+
+  fetchChartData(String id) {
+    return API.getMarketChart(id, currency);
   }
 }

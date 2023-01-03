@@ -2,6 +2,7 @@ import 'package:crypto_app/models/crypto_currency.dart';
 import 'package:crypto_app/providers/coins_provider.dart';
 import 'package:crypto_app/providers/theme_provider.dart';
 import 'package:crypto_app/widgets/coin_performance.dart';
+import 'package:crypto_app/widgets/market_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +10,9 @@ import 'package:provider/provider.dart';
 class DetailsPage extends StatefulWidget {
   final String id;
   final Cryptocurrency coin;
-  const DetailsPage({Key? key, required this.id, required this.coin})
+  final List<dynamic> chartData;
+  const DetailsPage(
+      {Key? key, required this.id, required this.coin, required this.chartData})
       : super(key: key);
 
   @override
@@ -123,6 +126,10 @@ class _DetailsPageState extends State<DetailsPage> {
                     ),
                     const SizedBox(
                       height: 20,
+                    ),
+                    MarketChart(
+                      id: coin.id!,
+                      chartData: widget.chartData,
                     ),
                     CoinPerformance(coin: coin),
                   ],
