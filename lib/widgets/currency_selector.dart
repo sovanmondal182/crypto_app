@@ -32,6 +32,8 @@ class CurrencySelector extends StatelessWidget {
                   onSelect: (Currency currency) {
                     currencySelectProvider.setCurrency(currency.code);
                     currencySelectProvider.setCurrencySymbol(currency.symbol);
+                    // await Provider.of<CoinsProvider>(context, listen: false)
+                    //     .fetchCoins();
                   },
                 );
               },

@@ -20,25 +20,16 @@ class _CoinsState extends State<Coins> {
         );
       } else {
         if (coinsProvider.coins.isNotEmpty) {
-          return RefreshIndicator(
-              onRefresh: () async {
-                await coinsProvider.fetchCoins();
-              },
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics()),
-                itemCount: coinsProvider.coins.length,
-                itemBuilder: (context, index) {
-                  return CoinListTile(coin: coinsProvider.coins[index]);
-                },
-              ));
-        } else {
-          return RefreshIndicator(
-            onRefresh: () async {
-              await coinsProvider.fetchCoins();
+          return ListView.builder(
+            physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics()),
+            itemCount: coinsProvider.coins.length,
+            itemBuilder: (context, index) {
+              return CoinListTile(coin: coinsProvider.coins[index]);
             },
-            child: const Text("No Data Found"),
           );
+        } else {
+          return const Text("No Data Found");
         }
       }
     });

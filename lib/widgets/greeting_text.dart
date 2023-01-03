@@ -37,9 +37,32 @@ class _GreetingTextState extends State<GreetingText> {
               onTap: () {
                 theme.toggleTheme();
               },
-              child: (theme.themeMode == ThemeMode.dark)
-                  ? const Icon(CupertinoIcons.sun_min_fill, size: 30)
-                  : const Icon(CupertinoIcons.moon_stars_fill, size: 30),
+              child:
+                  // (theme.themeMode == ThemeMode.dark)
+                  //     ? const Icon(CupertinoIcons.sun_min_fill, size: 30)
+                  //     : const Icon(CupertinoIcons.moon_stars_fill, size: 30),
+                  IconButton(
+                icon: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    transitionBuilder: (child, anim) => RotationTransition(
+                          turns: child.key == const ValueKey('icon1')
+                              ? Tween<double>(begin: 1, end: 0.75).animate(anim)
+                              : Tween<double>(begin: 0.75, end: 1)
+                                  .animate(anim),
+                          child: FadeTransition(opacity: anim, child: child),
+                        ),
+                    child: (theme.themeMode == ThemeMode.dark)
+                        ? const Icon(CupertinoIcons.sun_min_fill,
+                            size: 30, key: ValueKey('icon1'))
+                        : const Icon(
+                            CupertinoIcons.moon_stars_fill,
+                            size: 30,
+                            key: ValueKey('icon2'),
+                          )),
+                onPressed: () {
+                  theme.toggleTheme();
+                },
+              ),
             ),
           ],
         ),

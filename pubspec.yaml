@@ -40,6 +40,8 @@ dependencies:
   provider: ^6.0.5
   shared_preferences: ^2.0.15
   currency_picker: ^2.0.3
+  like_button: ^2.0.5
+  syncfusion_flutter_charts: ^20.4.41
 
 dev_dependencies:
   flutter_test:

@@ -32,38 +32,25 @@ class CoinsProvider with ChangeNotifier {
     coins = temp;
     isLoading = false;
     notifyListeners();
-    print('object');
-    // Timer(const Duration(seconds: 5), () {
-    //   fetchCoins();
-    // });
+    Timer(const Duration(seconds: 3), () {
+      fetchCoins();
+    });
   }
 
-  void addfavorites(Cryptocurrency coin) async {
-    int index = coins.indexOf(coin);
-    print('ok' + index.toString());
-    print('ok' + (coin.marketcaprank! - 1).toString());
-    print('ok' + coin.id.toString());
-    // coins[index].isfavorite = true;
+  Cryptocurrency fetchCoinsdByID(String id) {
+    Cryptocurrency coin = coins.firstWhere((element) => element.id == id);
+    return coin;
+  }
+
+  Future<void> addfavorites(Cryptocurrency coin) async {
     coins[coin.marketcaprank! - 1].isfavorite = true;
     await LocalStorage.addFavorite(coin.id!);
-
     notifyListeners();
   }
 
   Future<void> removefavorites(Cryptocurrency coin) async {
-    List<Cryptocurrency> favorites =
-        coins.where((element) => element.isfavorite == true).toList();
-    int index = coins.indexOf(coin);
-    print('ok' + index.toString());
-    print('ok' + (coin.marketcaprank! - 1).toString());
-    print('ok' + coin.id.toString());
-    // ignore: avoid_print, prefer_interpolation_to_compose_strings
-    // coins[index].isfavorite = false;
     coins[coin.marketcaprank! - 1].isfavorite = false;
-    // favorites[index].isfavorite = false;
-    print('coin' + coin.toString());
     await LocalStorage.removeFavorite(coin.id!);
-
     notifyListeners();
   }
 }

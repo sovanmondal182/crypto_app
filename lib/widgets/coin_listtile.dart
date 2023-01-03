@@ -17,7 +17,6 @@ class CoinListTile extends StatelessWidget {
         Provider.of<CoinsProvider>(context, listen: false);
     return ListTile(
       onTap: () {
-        print(coin.id);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return DetailsPage(
             id: coin.id!,
@@ -31,58 +30,47 @@ class CoinListTile extends StatelessWidget {
           Flexible(
             child: Text(coin.name!, overflow: TextOverflow.ellipsis),
           ),
-          const SizedBox(
-            width: 5,
-          ),
-          (coin.isfavorite == true)
-              ? GestureDetector(
-                  onTap: () {
-                    coinsProvider.removefavorites(coin);
-                    print(coin.id);
-                  },
-                  child: const Icon(
-                    size: 20,
-                    Icons.star,
-                    color: Colors.yellow,
-                  ),
-                )
-              : GestureDetector(
-                  onTap: () {
-                    coinsProvider.addfavorites(coin);
-                  },
-                  child: const Icon(
-                    size: 20,
-                    Icons.star_border,
-                    color: Colors.yellow,
-                  ),
-                ),
+          // const SizedBox(
+          //   width: 5,
+          // ),
+          // (coin.isfavorite == true)
+          //     ? GestureDetector(
+          //         onTap: () {
+          //           coinsProvider.removefavorites(coin);
+          //           print(coin.id);
+          //         },
+          //         child: const Icon(
+          //           size: 20,
+          //           Icons.star,
+          //           color: Colors.yellow,
+          //         ),
+          //       )
+          //     : GestureDetector(
+          //         onTap: () {
+          //           coinsProvider.addfavorites(coin);
+          //         },
+          //         child: const Icon(
+          //           size: 20,
+          //           Icons.star_border,
+          //           color: Colors.yellow,
+          //         ),
+          //       ),
         ],
       ),
       leading: coin.image == null
-          ? Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      color: (theme.themeMode == ThemeMode.dark)
-                          ? Colors.white
-                          : Colors.black,
-                      width: 0.1),
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(100)),
+          ? CircleAvatar(
+              backgroundColor: Colors.grey.shade200,
+              child: Text(
+                coin.symbol!.toUpperCase(),
+                style: TextStyle(
+                    color: (theme.themeMode == ThemeMode.dark)
+                        ? Colors.white
+                        : Colors.black),
+              ),
             )
-          : Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      color: (theme.themeMode == ThemeMode.dark)
-                          ? Colors.white
-                          : Colors.black,
-                      width: 0.1),
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(100),
-                  image: DecorationImage(image: NetworkImage(coin.image!))),
+          : CircleAvatar(
+              backgroundColor: Colors.grey.shade200,
+              backgroundImage: NetworkImage(coin.image!),
             ),
       subtitle: Text(coin.symbol!.toUpperCase()),
       trailing: Column(
