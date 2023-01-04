@@ -1,8 +1,7 @@
 import 'package:crypto_app/models/crypto_currency.dart';
-import 'package:crypto_app/network/apis.dart';
-import 'package:crypto_app/pages/details_page.dart';
 import 'package:crypto_app/providers/coins_provider.dart';
 import 'package:crypto_app/providers/theme_provider.dart';
+import 'package:crypto_app/pages/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,15 +17,16 @@ class CoinListTile extends StatelessWidget {
         Provider.of<CoinsProvider>(context, listen: false);
     return ListTile(
       onTap: () async {
-        List<dynamic> marketChart =
-            await API.getMarketChart(coin.id, coinsProvider.currency);
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return DetailsPage(
-            id: coin.id!,
-            coin: coin,
-            chartData: marketChart,
-          );
-        }));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return LoadingPage(
+                coin: coin,
+              );
+            },
+          ),
+        );
       },
       contentPadding: const EdgeInsets.only(left: 3, right: 3),
       title: Row(
@@ -34,31 +34,6 @@ class CoinListTile extends StatelessWidget {
           Flexible(
             child: Text(coin.name!, overflow: TextOverflow.ellipsis),
           ),
-          // const SizedBox(
-          //   width: 5,
-          // ),
-          // (coin.isfavorite == true)
-          //     ? GestureDetector(
-          //         onTap: () {
-          //           coinsProvider.removefavorites(coin);
-          //           print(coin.id);
-          //         },
-          //         child: const Icon(
-          //           size: 20,
-          //           Icons.star,
-          //           color: Colors.yellow,
-          //         ),
-          //       )
-          //     : GestureDetector(
-          //         onTap: () {
-          //           coinsProvider.addfavorites(coin);
-          //         },
-          //         child: const Icon(
-          //           size: 20,
-          //           Icons.star_border,
-          //           color: Colors.yellow,
-          //         ),
-          //       ),
         ],
       ),
       leading: coin.image == null

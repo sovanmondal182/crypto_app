@@ -54,7 +54,26 @@ class CoinsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  fetchChartData(String id) {
-    return API.getMarketChart(id, currency);
+  Future<List<dynamic>> fetchChartData(String id) async {
+    try {
+      List<dynamic> marketChart1 = await API.getMarketChart(id, currency, '1');
+      List<dynamic> marketChart7 = await API.getMarketChart(id, currency, '7');
+      List<dynamic> marketChart30 =
+          await API.getMarketChart(id, currency, '30');
+      List<dynamic> marketChart365 =
+          await API.getMarketChart(id, currency, '365');
+      List<dynamic> marketChartmax =
+          await API.getMarketChart(id, currency, '1825');
+      isLoading = false;
+      return [
+        marketChart1,
+        marketChart7,
+        marketChart30,
+        marketChart365,
+        marketChartmax
+      ];
+    } catch (e) {
+      return [];
+    }
   }
 }

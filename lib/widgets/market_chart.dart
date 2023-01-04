@@ -1,5 +1,4 @@
 import 'package:crypto_app/providers/coins_provider.dart';
-import 'package:crypto_app/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +7,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 class MarketChart extends StatefulWidget {
   final String id;
   final List<dynamic> chartData;
-  MarketChart({Key? key, required this.id, required this.chartData})
+  const MarketChart({Key? key, required this.id, required this.chartData})
       : super(key: key);
 
   @override
@@ -18,6 +17,8 @@ class MarketChart extends StatefulWidget {
 class _MarketChartState extends State<MarketChart> {
   late List<ChartData> _chartData;
   late TrackballBehavior _trackballBehavior;
+  late String currency =
+      Provider.of<CoinsProvider>(context, listen: false).currency;
 
   @override
   void initState() {
@@ -31,30 +32,21 @@ class _MarketChartState extends State<MarketChart> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider themeData =
-        Provider.of<ThemeProvider>(context, listen: false);
-
     return SfCartesianChart(
       margin: EdgeInsets.zero,
       borderWidth: 0,
       borderColor: Colors.transparent,
       plotAreaBorderWidth: 0,
       series: <ChartSeries>[
-        SplineAreaSeries<ChartData, DateTime>(
+        SplineSeries<ChartData, DateTime>(
+          yAxisName: '',
+          enableTooltip: false,
+          isVisibleInLegend: false,
+          color: const Color(0xff4D64CF),
           dataSource: _chartData,
           xValueMapper: (ChartData data, _) => data.time,
           yValueMapper: (ChartData data, _) => data.price,
-          gradient: LinearGradient(
-            colors: [
-              Colors.blue,
-              (themeData.themeMode == ThemeMode.dark)
-                  ? Colors.black
-                  : Colors.white,
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        )
       ],
       primaryXAxis: DateTimeAxis(
         dateFormat: DateFormat.yMd().add_Hm(),
@@ -79,8 +71,6 @@ class _MarketChartState extends State<MarketChart> {
   List<ChartData> getChartData() {
     final List<ChartData> chartData = [];
 
-    Provider.of<CoinsProvider>(context, listen: false)
-        .fetchChartData(widget.id);
     for (var element in widget.chartData) {
       chartData.add(ChartData(
           DateTime.fromMillisecondsSinceEpoch(element[0]), element[1]));

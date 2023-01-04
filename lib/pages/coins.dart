@@ -29,7 +29,16 @@ class _CoinsState extends State<Coins> {
             },
           );
         } else {
-          return const Text("No Data Found");
+          return Center(
+              child: Column(
+            children: const [
+              Text("No Coins Found!"),
+              SizedBox(
+                height: 10,
+              ),
+              Text("Try Again"),
+            ],
+          ));
         }
       }
     });

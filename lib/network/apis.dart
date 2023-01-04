@@ -15,10 +15,10 @@ class API {
   }
 
   static Future<List<dynamic>> getMarketChart(
-      String? id, String? currency) async {
+      String? id, String? currency, String? days) async {
     try {
       var response = await http.get(Uri.parse(
-          'https://api.coingecko.com/api/v3/coins/$id/market_chart?vs_currency=$currency&days=1'));
+          'https://api.coingecko.com/api/v3/coins/$id/market_chart?vs_currency=$currency&days=$days'));
       var decodedResponse = jsonDecode(response.body);
       List<dynamic> marketChart = decodedResponse['prices'] as List<dynamic>;
       return marketChart;

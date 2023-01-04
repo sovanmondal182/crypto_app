@@ -1,5 +1,5 @@
 import 'package:crypto_app/constants/app_themes.dart';
-import 'package:crypto_app/pages/home_page.dart';
+import 'package:crypto_app/pages/splash_page.dart';
 import 'package:crypto_app/providers/coins_provider.dart';
 import 'package:crypto_app/providers/currency_select_provider.dart';
 import 'package:crypto_app/providers/theme_provider.dart';
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
           theme: lightTheme,
           darkTheme: darkTheme,
           themeMode: themeProvider.themeMode,
-          home: const HomePage(),
+          home: const SplashPage(),
         );
       }),
     );

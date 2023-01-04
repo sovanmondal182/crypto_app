@@ -10,16 +10,36 @@ import 'package:provider/provider.dart';
 class DetailsPage extends StatefulWidget {
   final String id;
   final Cryptocurrency coin;
-  final List<dynamic> chartData;
+  final List<dynamic> chartData1;
+  final List<dynamic> chartData7;
+  final List<dynamic> chartData30;
+  final List<dynamic> chartData365;
+  final List<dynamic> chartDatamax;
   const DetailsPage(
-      {Key? key, required this.id, required this.coin, required this.chartData})
+      {Key? key,
+      required this.id,
+      required this.coin,
+      required this.chartData1,
+      required this.chartData7,
+      required this.chartData30,
+      required this.chartData365,
+      required this.chartDatamax})
       : super(key: key);
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();
 }
 
-class _DetailsPageState extends State<DetailsPage> {
+class _DetailsPageState extends State<DetailsPage>
+    with TickerProviderStateMixin {
+  late TabController tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 5, vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
     ThemeProvider themeData =
@@ -127,9 +147,63 @@ class _DetailsPageState extends State<DetailsPage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    MarketChart(
-                      id: coin.id!,
-                      chartData: widget.chartData,
+                    SizedBox(
+                      height: 250,
+                      child: TabBarView(
+                        physics: const BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics()),
+                        controller: tabController,
+                        children: [
+                          MarketChart(
+                            id: coin.id!,
+                            chartData: widget.chartData1,
+                          ),
+                          MarketChart(
+                            id: coin.id!,
+                            chartData: widget.chartData7,
+                          ),
+                          MarketChart(
+                            id: coin.id!,
+                            chartData: widget.chartData30,
+                          ),
+                          MarketChart(
+                            id: coin.id!,
+                            chartData: widget.chartData365,
+                          ),
+                          MarketChart(
+                            id: coin.id!,
+                            chartData: widget.chartDatamax,
+                          ),
+                        ],
+                      ),
+                    ),
+                    TabBar(
+                        indicatorColor: const Color(0xff4D64CF),
+                        controller: tabController,
+                        labelColor: const Color(0xff4D64CF),
+                        unselectedLabelColor:
+                            (themeData.themeMode == ThemeMode.dark)
+                                ? Colors.white
+                                : Colors.black,
+                        tabs: const [
+                          Tab(
+                            child: Text('1D'),
+                          ),
+                          Tab(
+                            child: Text('1W'),
+                          ),
+                          Tab(
+                            child: Text('1M'),
+                          ),
+                          Tab(
+                            child: Text('1Y'),
+                          ),
+                          Tab(
+                            child: Text('5Y'),
+                          ),
+                        ]),
+                    const SizedBox(
+                      height: 20,
                     ),
                     CoinPerformance(coin: coin),
                   ],

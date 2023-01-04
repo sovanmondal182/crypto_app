@@ -43,20 +43,23 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     height: 20,
                   ),
                   const CurrencySelector(),
-                  TabBar(controller: tabController, tabs: [
-                    Tab(
-                      child: Text(
-                        'Coins',
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        'Favorites',
-                        style: Theme.of(context).textTheme.bodyText1,
-                      ),
-                    ),
-                  ]),
+                  TabBar(
+                      indicatorColor: const Color(0xff4D64CF),
+                      controller: tabController,
+                      tabs: [
+                        Tab(
+                          child: Text(
+                            'Coins',
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            'Favorites',
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        ),
+                      ]),
                   Expanded(
                     child: TabBarView(
                       physics: const BouncingScrollPhysics(
