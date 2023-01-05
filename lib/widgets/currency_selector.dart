@@ -1,4 +1,4 @@
-import 'package:crypto_app/providers/currency_select_provider.dart';
+import 'package:coinup/providers/currency_select_provider.dart';
 import 'package:currency_picker/currency_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';

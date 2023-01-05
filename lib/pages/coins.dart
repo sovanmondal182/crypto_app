@@ -1,5 +1,5 @@
-import 'package:crypto_app/providers/coins_provider.dart';
-import 'package:crypto_app/widgets/coin_listtile.dart';
+import 'package:coinup/providers/coins_provider.dart';
+import 'package:coinup/widgets/coin_listtile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,12 +31,13 @@ class _CoinsState extends State<Coins> {
         } else {
           return Center(
               child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               Text("No Coins Found!"),
               SizedBox(
                 height: 10,
               ),
-              Text("Try Again"),
+              Text("Please check your internet connection!"),
             ],
           ));
         }

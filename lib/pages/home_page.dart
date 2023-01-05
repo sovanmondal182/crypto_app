@@ -1,8 +1,8 @@
-import 'package:crypto_app/pages/coins.dart';
-import 'package:crypto_app/pages/favorites.dart';
-import 'package:crypto_app/providers/currency_select_provider.dart';
-import 'package:crypto_app/widgets/currency_selector.dart';
-import 'package:crypto_app/widgets/greeting_text.dart';
+import 'package:coinup/pages/coins.dart';
+import 'package:coinup/pages/favorites.dart';
+import 'package:coinup/providers/currency_select_provider.dart';
+import 'package:coinup/widgets/currency_selector.dart';
+import 'package:coinup/widgets/greeting_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

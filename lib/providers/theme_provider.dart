@@ -1,4 +1,4 @@
-import 'package:crypto_app/storage/local_storage.dart';
+import 'package:coinup/storage/local_storage.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider with ChangeNotifier {

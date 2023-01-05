@@ -1,6 +1,6 @@
-import 'package:crypto_app/models/crypto_currency.dart';
-import 'package:crypto_app/pages/details_page.dart';
-import 'package:crypto_app/providers/coins_provider.dart';
+import 'package:coinup/models/crypto_currency.dart';
+import 'package:coinup/pages/details_page.dart';
+import 'package:coinup/providers/coins_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

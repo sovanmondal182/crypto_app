@@ -1,8 +1,8 @@
-import 'package:crypto_app/models/crypto_currency.dart';
-import 'package:crypto_app/providers/coins_provider.dart';
-import 'package:crypto_app/providers/theme_provider.dart';
-import 'package:crypto_app/widgets/coin_performance.dart';
-import 'package:crypto_app/widgets/market_chart.dart';
+import 'package:coinup/models/crypto_currency.dart';
+import 'package:coinup/providers/coins_provider.dart';
+import 'package:coinup/providers/theme_provider.dart';
+import 'package:coinup/widgets/coin_performance.dart';
+import 'package:coinup/widgets/market_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
@@ -60,154 +60,155 @@ class _DetailsPageState extends State<DetailsPage>
                 right: 20,
                 bottom: 0,
               ),
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics()),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.grey.shade200,
-                              backgroundImage: NetworkImage(coin.image!),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              ("${coin.name!} (${coin.symbol!.toUpperCase()})"),
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        LikeButton(
-                          size: 25,
-                          circleColor: const CircleColor(
-                              start: Color(0xFFE26D13), end: Color(0xFFE09119)),
-                          bubblesColor: const BubblesColor(
-                            dotPrimaryColor: Color(0xFFE26D13),
-                            dotSecondaryColor: Color(0xFFE09119),
-                          ),
-                          likeBuilder: (bool isLiked) {
-                            return Icon(
-                              Icons.favorite,
-                              color: (coin.isfavorite == true)
-                                  ? Colors.red
-                                  : (themeData.themeMode == ThemeMode.dark)
-                                      ? Colors.white
-                                      : Colors.grey,
-                              size: 25,
-                            );
-                          },
-                          onTap: (isLiked) async {
-                            if ((coin.isfavorite == false)) {
-                              await coinsProvider.addfavorites(coin);
-                              return isLiked = coin.isfavorite!;
-                            } else {
-                              await coinsProvider.removefavorites(coin);
-                              return isLiked = coin.isfavorite!;
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "${coinsProvider.symbol} ${coin.currentprice!.toStringAsFixed(4)}",
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          (coin.pricechangepercentage_24h! > 0)
-                              ? "▲ +${coin.pricechangepercentage_24h!.toStringAsFixed(2)}% (+${coin.pricechange_24h!.toStringAsFixed(4)})"
-                              : "▼ ${coin.pricechangepercentage_24h!.toStringAsFixed(2)}% (${coin.pricechange_24h!.toStringAsFixed(4)})",
-                          style: TextStyle(
-                              fontSize: 15,
-                              color: coin.pricechangepercentage_24h! > 0
-                                  ? Colors.green
-                                  : Colors.red),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    SizedBox(
-                      height: 250,
-                      child: TabBarView(
-                        physics: const BouncingScrollPhysics(
-                            parent: AlwaysScrollableScrollPhysics()),
-                        controller: tabController,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
                         children: [
-                          MarketChart(
-                            id: coin.id!,
-                            chartData: widget.chartData1,
+                          CircleAvatar(
+                            backgroundColor: Colors.grey.shade200,
+                            backgroundImage: NetworkImage(coin.image!),
                           ),
-                          MarketChart(
-                            id: coin.id!,
-                            chartData: widget.chartData7,
+                          const SizedBox(
+                            width: 10,
                           ),
-                          MarketChart(
-                            id: coin.id!,
-                            chartData: widget.chartData30,
-                          ),
-                          MarketChart(
-                            id: coin.id!,
-                            chartData: widget.chartData365,
-                          ),
-                          MarketChart(
-                            id: coin.id!,
-                            chartData: widget.chartDatamax,
+                          Text(
+                            ("${coin.name!} (${coin.symbol!.toUpperCase()})"),
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ],
                       ),
+                      LikeButton(
+                        size: 25,
+                        circleColor: const CircleColor(
+                            start: Color(0xFFE26D13), end: Color(0xFFE09119)),
+                        bubblesColor: const BubblesColor(
+                          dotPrimaryColor: Color(0xFFE26D13),
+                          dotSecondaryColor: Color(0xFFE09119),
+                        ),
+                        likeBuilder: (bool isLiked) {
+                          return Icon(
+                            Icons.favorite,
+                            color: (coin.isfavorite == true)
+                                ? Colors.red
+                                : (themeData.themeMode == ThemeMode.dark)
+                                    ? Colors.white
+                                    : Colors.grey,
+                            size: 25,
+                          );
+                        },
+                        onTap: (isLiked) async {
+                          if ((coin.isfavorite == false)) {
+                            await coinsProvider.addfavorites(coin);
+                            return isLiked = coin.isfavorite!;
+                          } else {
+                            await coinsProvider.removefavorites(coin);
+                            return isLiked = coin.isfavorite!;
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "${coinsProvider.symbol} ${coin.currentprice!.toStringAsFixed(4)}",
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        (coin.pricechangepercentage_24h! > 0)
+                            ? "▲ +${coin.pricechangepercentage_24h!.toStringAsFixed(2)}% (+${coin.pricechange_24h!.toStringAsFixed(4)})"
+                            : "▼ ${coin.pricechangepercentage_24h!.toStringAsFixed(2)}% (${coin.pricechange_24h!.toStringAsFixed(4)})",
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: coin.pricechangepercentage_24h! > 0
+                                ? Colors.green
+                                : Colors.red),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    height: 250,
+                    child: TabBarView(
+                      physics: const BouncingScrollPhysics(
+                          parent: AlwaysScrollableScrollPhysics()),
+                      controller: tabController,
+                      children: [
+                        MarketChart(
+                          id: coin.id!,
+                          chartData: widget.chartData1,
+                          days: 1,
+                        ),
+                        MarketChart(
+                          id: coin.id!,
+                          chartData: widget.chartData7,
+                          days: 7,
+                        ),
+                        MarketChart(
+                          id: coin.id!,
+                          chartData: widget.chartData30,
+                          days: 30,
+                        ),
+                        MarketChart(
+                          id: coin.id!,
+                          chartData: widget.chartData365,
+                          days: 365,
+                        ),
+                        MarketChart(
+                          id: coin.id!,
+                          chartData: widget.chartDatamax,
+                          days: 1825,
+                        ),
+                      ],
                     ),
-                    TabBar(
-                        indicatorColor: const Color(0xff4D64CF),
-                        controller: tabController,
-                        labelColor: const Color(0xff4D64CF),
-                        unselectedLabelColor:
-                            (themeData.themeMode == ThemeMode.dark)
-                                ? Colors.white
-                                : Colors.black,
-                        tabs: const [
-                          Tab(
-                            child: Text('1D'),
-                          ),
-                          Tab(
-                            child: Text('1W'),
-                          ),
-                          Tab(
-                            child: Text('1M'),
-                          ),
-                          Tab(
-                            child: Text('1Y'),
-                          ),
-                          Tab(
-                            child: Text('5Y'),
-                          ),
-                        ]),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    CoinPerformance(coin: coin),
-                  ],
-                ),
+                  ),
+                  TabBar(
+                      indicatorColor: const Color(0xff4D64CF),
+                      controller: tabController,
+                      labelColor: const Color(0xff4D64CF),
+                      unselectedLabelColor:
+                          (themeData.themeMode == ThemeMode.dark)
+                              ? Colors.white
+                              : Colors.black,
+                      tabs: const [
+                        Tab(
+                          child: Text('1D'),
+                        ),
+                        Tab(
+                          child: Text('1W'),
+                        ),
+                        Tab(
+                          child: Text('1M'),
+                        ),
+                        Tab(
+                          child: Text('1Y'),
+                        ),
+                        Tab(
+                          child: Text('5Y'),
+                        ),
+                      ]),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CoinPerformance(coin: coin),
+                ],
               ),
             ),
           );

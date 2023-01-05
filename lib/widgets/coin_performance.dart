@@ -1,5 +1,5 @@
-import 'package:crypto_app/models/crypto_currency.dart';
-import 'package:crypto_app/providers/coins_provider.dart';
+import 'package:coinup/models/crypto_currency.dart';
+import 'package:coinup/providers/coins_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -56,9 +56,6 @@ class CoinPerformance extends StatelessWidget {
         space(),
         coinPerformancew('Volume',
             "${coinsProvider.symbol} ${coin.totalvolume!.toStringAsFixed(4)}"),
-        space(),
-        coinPerformancew('Circulating Supply',
-            "${coin.circulatingsupply!.toInt().toString()} ${coin.symbol!.toUpperCase()}"),
         space(),
         coinPerformancew('24H High',
             "${coinsProvider.symbol} ${coin.high_24h!.toStringAsFixed(4)}"),

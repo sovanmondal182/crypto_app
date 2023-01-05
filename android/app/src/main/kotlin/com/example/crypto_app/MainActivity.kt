@@ -1,4 +1,4 @@
-package com.example.crypto_app
+package com.example.coinup
 
 import io.flutter.embedding.android.FlutterActivity
 

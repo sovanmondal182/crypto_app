@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.crypto_app">
+    package="com.example.coinup">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="CoinUP"

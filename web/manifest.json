@@ -1,6 +1,6 @@
 {
-    "name": "crypto_app",
-    "short_name": "crypto_app",
+    "name": "coinup",
+    "short_name": "coinup",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
