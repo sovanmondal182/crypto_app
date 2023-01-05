@@ -1,9 +1,9 @@
-import 'package:crypto_app/constants/app_themes.dart';
-import 'package:crypto_app/pages/splash_page.dart';
-import 'package:crypto_app/providers/coins_provider.dart';
-import 'package:crypto_app/providers/currency_select_provider.dart';
-import 'package:crypto_app/providers/theme_provider.dart';
-import 'package:crypto_app/storage/local_storage.dart';
+import 'package:coinup/constants/app_themes.dart';
+import 'package:coinup/pages/splash_page.dart';
+import 'package:coinup/providers/coins_provider.dart';
+import 'package:coinup/providers/currency_select_provider.dart';
+import 'package:coinup/providers/theme_provider.dart';
+import 'package:coinup/storage/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

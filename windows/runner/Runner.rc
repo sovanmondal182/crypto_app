@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "crypto_app" "\0"
+            VALUE "FileDescription", "coinup" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "crypto_app" "\0"
+            VALUE "InternalName", "coinup" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "crypto_app.exe" "\0"
-            VALUE "ProductName", "crypto_app" "\0"
+            VALUE "OriginalFilename", "coinup.exe" "\0"
+            VALUE "ProductName", "coinup" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

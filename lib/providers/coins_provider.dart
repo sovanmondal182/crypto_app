@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:crypto_app/models/crypto_currency.dart';
-import 'package:crypto_app/network/apis.dart';
-import 'package:crypto_app/storage/local_storage.dart';
+import 'package:coinup/models/crypto_currency.dart';
+import 'package:coinup/network/apis.dart';
+import 'package:coinup/storage/local_storage.dart';
 import 'package:flutter/material.dart';
 
 class CoinsProvider with ChangeNotifier {

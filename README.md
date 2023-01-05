@@ -1,4 +1,4 @@
-# crypto_app
+# coinup
 
 A new Flutter project.
 

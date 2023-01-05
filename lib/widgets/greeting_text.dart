@@ -1,4 +1,4 @@
-import 'package:crypto_app/providers/theme_provider.dart';
+import 'package:coinup/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
